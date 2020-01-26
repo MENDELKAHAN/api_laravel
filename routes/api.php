@@ -25,6 +25,15 @@ Route::get('/status', function () {
 
 Route::apiResource('roles', 'RoleController');
 Route::apiResource('users', 'UserController');
+Route::apiResource('permission', 'PermissionController');
+
+Route::post('users/storeUserRole', 'UserController@storeUserRole');
+Route::post('users/storeUserPermission', 'UserController@storeUserPermission');
+
+
+
+
+
 
  });
 
