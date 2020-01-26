@@ -92,7 +92,7 @@ class UserController extends Controller
 
     public function storeUserRole(Request $request)
     {
-        // authenticate
+        // validate
 
         // set user role
         $user = User::find($request -> user);
@@ -105,17 +105,30 @@ class UserController extends Controller
 
      public function storeUserPermission(Request $request)
     {
-        // authenticate
+        // validate
 
         // get permission
-       $permission = Permission::find($request->permission);
-       $user = User::find($request->user);
-
-        $user->permission()->associate($permission);
-
-        // $user->save();
+        $permission = Permission::find($request->permission);
+        $user = User::find($request->user);
+        $user->permissions()->attach($permission);
        
         // // return 
         return response()->json(['success' => 'true']);    
     }
+
+    public function destroyUserPermission(Request $request)
+    {
+        // validate
+
+        // get permission
+        $permission = Permission::find($request->permission);
+        $user = User::find($request->user);
+        $user->permissions()->detach($permission);
+
+        // return 
+        return response()->json(['success' => 'true']);    
+    }
+
+
+    $user->roles()->detach($roleId);
 }

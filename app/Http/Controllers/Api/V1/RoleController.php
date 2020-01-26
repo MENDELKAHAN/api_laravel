@@ -83,4 +83,32 @@ class RoleController extends Controller
     {
         //
     }
+
+
+
+     public function storeUserPermission(Request $request)
+    {
+        // validate
+
+        // get permission
+        $permission = Permission::find($request->permission);
+        $role = Role::find($request->role);
+        $role->permissions()->attach($permission);
+       
+        // return 
+        return response()->json(['success' => 'true']);    
+    }
+
+    public function destroyUserPermission(Request $request)
+    {
+        // validate
+
+        // get permission
+        $permission = Permission::find($request->permission);
+        $role = Role::find($request->role);
+        $role->permissions()->detach($permission);
+       
+        // return 
+        return response()->json(['success' => 'true']);    
+    }
 }

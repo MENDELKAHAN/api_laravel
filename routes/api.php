@@ -27,8 +27,12 @@ Route::apiResource('roles', 'RoleController');
 Route::apiResource('users', 'UserController');
 Route::apiResource('permission', 'PermissionController');
 
-Route::post('users/storeUserRole', 'UserController@storeUserRole');
-Route::post('users/storeUserPermission', 'UserController@storeUserPermission');
+Route::post('users/store-user-role', 'UserController@storeUserRole');
+Route::post('users/store-user-permission', 'UserController@storeUserPermission');
+Route::delete('users/destroy-user-permission', 'UserController@storeUserPermission');
+
+Route::post('role/store-role-permission', 'UserController@storeUserPermission');
+Route::delete('role/destroy-role-permission', 'UserController@storeUserPermission');
 
 
 
