@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Permission;
 use App\Http\Resources\User as UserResource;
+use App\Http\Resources\Permission as PermissionResource;
 use App\Http\Requests\StoreUser;
 
 class UserController extends Controller
@@ -91,7 +92,6 @@ class UserController extends Controller
 
     public function storeUserRole(Request $request)
     {
-        // validate
 
         // set user role
         $user = User::find($request -> user);
@@ -99,7 +99,7 @@ class UserController extends Controller
         $user -> save();   
        
         // return 
-        return response()->json(['success' => 'true']);    
+         return UserResource::collection(User::paginate(10)); 
     }
 
      public function storeUserPermission(Request $request)
@@ -110,9 +110,9 @@ class UserController extends Controller
         $permission = Permission::find($request->permission);
         $user = User::find($request->user);
         $user->permissions()->attach($permission);
-       
-        // // return 
-        return response()->json(['success' => 'true']);    
+ 
+         return PermissionResource::collection(Permission::paginate(10)); 
+
     }
 
     public function destroyUserPermission(Request $request)
@@ -125,8 +125,7 @@ class UserController extends Controller
         $user->permissions()->detach($permission);
 
         // return 
-        return response()->json(['success' => 'true']);    
+         return response()->noContent();
     }
 
-    $user->roles()->detach($roleId);
 }

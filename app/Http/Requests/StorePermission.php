@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class StorePermission extends FormRequest
 {
     /**
@@ -13,7 +13,7 @@ class StorePermission extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,14 @@ class StorePermission extends FormRequest
      */
     public function rules()
     {
+       isset($this->Permission->id) ? $permissionID = $this-> permission -> id : $permissionID = "";
+
+
         return [
-            'name' => 'required|string',
+           'name' => [
+                'required',
+                Rule::unique('permissions')->ignore($permissionID),
+            ],
             'slug' => 'required|string',
         ];
     }

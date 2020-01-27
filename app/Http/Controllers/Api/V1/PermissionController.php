@@ -31,12 +31,10 @@ class PermissionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(StorePermission $request)
-    {
-        // isset($this->item->id) ? $itemID = $this->item->id : $itemID = "";
-        
+    {        
         $validatedData = $request->validated();
         $permission = new Permission();
-        $new_permission = $role-> create($validatedData);
+        $new_permission = $permission-> create($validatedData);
         return new PermissionResource( $new_permission );
     }
 
@@ -58,10 +56,10 @@ class PermissionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(StorePermission $request, $id)
+     public function update(StorePermission $request, Permission $permission)
     {
         $validatedData = $request->validated();
-         $result = Permission::where('id', '=', $id)->update($validatedData);
+         $result = Permission::where('id', '=', $permission -> id)->update($validatedData);
          if($result){
              return response()->json(['success' => 'true']);
          }
