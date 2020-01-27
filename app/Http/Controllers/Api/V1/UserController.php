@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\User;
 use App\Permission;
-
 use App\Http\Resources\User as UserResource;
 use App\Http\Requests\StoreUser;
 
@@ -86,7 +85,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+         return User::destroy($id);
     }
 
 
@@ -128,7 +127,6 @@ class UserController extends Controller
         // return 
         return response()->json(['success' => 'true']);    
     }
-
 
     $user->roles()->detach($roleId);
 }
