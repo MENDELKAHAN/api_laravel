@@ -47,7 +47,7 @@ class PermissionController extends Controller
     public function show(Permission $permission)
     {
         return new PermissionResource($permission);
-    }
+    } 
 
     /**
      * Update the specified resource in storage.

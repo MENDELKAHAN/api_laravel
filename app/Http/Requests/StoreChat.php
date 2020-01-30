@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
-class StorePermission extends FormRequest
-{ 
+use Illuminate\Validation\Chat;
+class StoreChat extends FormRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,15 +23,11 @@ class StorePermission extends FormRequest
      */
     public function rules()
     {
-       isset($this->Permission->id) ? $permissionID = $this-> permission -> id : $permissionID = "";
-
-
+       
         return [
-           'name' => [
-                'required',
-                Rule::unique('permissions')->ignore($permissionID),
-            ],
-            'slug' => 'required|string',
-        ];
+            
+             'receiver' => 'required|digits',
+             'message' => 'required|string',
+         ];
     }
 }

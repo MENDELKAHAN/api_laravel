@@ -14,17 +14,23 @@ class StoreRole extends FormRequest
     public function authorize()
     {
         return true;
-    }
+    } 
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-    public function rules()
+ public function rules()
     {
+       isset($this->Role->id) ? $roleID = $this-> role -> id : $roleID = "";
+
+
         return [
-            'name' => 'required|string',
+           'name' => [
+                'required',
+                Rule::unique('role')->ignore($roleID),
+            ],
             'slug' => 'required|string',
         ];
     }

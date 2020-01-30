@@ -23,14 +23,19 @@ Route::get('/status', function () {
     return response()->json(['status' => 'OK']);
 })->name('status');
 
+
+Route::get('chats/getNewMessagesAlert', 'ChatController@getNewMessagesAlert');
+
+
 Route::apiResource('roles', 'RoleController');
 Route::apiResource('users', 'UserController');
 Route::apiResource('permission', 'PermissionController');
+Route::apiResource('chats', 'ChatController');
+
 
 Route::post('users/store-user-role', 'UserController@storeUserRole');
 Route::post('users/store-user-permission', 'UserController@storeUserPermission');
 Route::delete('users/destroy-user-permission', 'UserController@storeUserPermission');
-
 Route::post('role/store-role-permission', 'UserController@storeUserPermission');
 Route::delete('role/destroy-role-permission', 'UserController@storeUserPermission');
 

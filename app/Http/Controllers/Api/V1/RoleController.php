@@ -33,7 +33,6 @@ class RoleController extends Controller
      */
     public function store(StoreRole $request)
     {
-        isset($this->item->id) ? $itemID = $this->item->id : $itemID = "";
         
         $validatedData = $request->validated();
         $role = new Role();
@@ -60,18 +59,16 @@ class RoleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     public function update(StoreRole $request, $id)
+    public function update(StorePermission $request, Role $role)
     {
         $validatedData = $request->validated();
-         $result = Role::where('id', '=', $id)->update($validatedData);
+         $result = Role::where('id', '=', $role -> id)->update($validatedData);
          if($result){
              return response()->json(['success' => 'true']);
          }
-         // else{
-
-         // }
-        
     }
+
+
 
     /**
      * Remove the specified resource from storage.
