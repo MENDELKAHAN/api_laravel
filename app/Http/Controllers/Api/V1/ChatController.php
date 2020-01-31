@@ -20,8 +20,22 @@ class ChatController extends Controller
     public function index()
     {
         $users = User::where('id', '<>', $this -> activeUserId)->get();
-        $users = $this -> message_count($users);       
-        echo json_encode($users);
+        $users = $this -> message_count($users);   
+        foreach ($users as $user) {
+            $chats = $this -> show($user -> id);
+            $chatsOrder = array();
+            foreach ($chats as $chat) {
+                if($chat-> receiver == $this -> activeUserId){
+                    $chatsOrder[] = array('from' => $chat);
+                }else{
+                     $chatsOrder[] = array('to' => $chat);
+                }
+            }
+               $user -> chatHistory = $chatsOrder;
+            }    
+            
+             return response()->json($users);
+        
     }
 
 // sending a chat
@@ -36,6 +50,7 @@ class ChatController extends Controller
         $chat->save();
         $return["success"] = "sent";
         echo json_encode($return);
+
     }
 
 
