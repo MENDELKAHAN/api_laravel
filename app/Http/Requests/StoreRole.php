@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-
+use Illuminate\Validation\Rule;
 class StoreRole extends FormRequest
 {
     /**
@@ -23,14 +23,15 @@ class StoreRole extends FormRequest
      */
  public function rules()
     {
-       isset($this->Role->id) ? $roleID = $this-> role -> id : $roleID = "";
+       // isset($this->Role->id) ? $roleID = $this-> role -> id : $roleID = "";
 
 
         return [
-           'name' => [
-                'required',
-                Rule::unique('role')->ignore($roleID),
-            ],
+           // 'name' => [
+           //      'required',
+           //      Rule::unique('role')->ignore($roleID),
+           //  ],
+            'name' => 'required|string',
             'slug' => 'required|string',
         ];
     }
